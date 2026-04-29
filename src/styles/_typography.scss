@@ -1,0 +1,51 @@
+@use 'variables' as *;
+
+// Section heading — mixed fonts
+.text-heading {
+  font-size: $text-heading;
+  letter-spacing: -0.02em;
+  line-height: 1;
+
+  .sans {
+    font-family: $font-sans;
+    font-weight: 500;
+  }
+
+  .serif {
+    font-family: $font-serif;
+    font-style: italic;
+    font-weight: 600;
+  }
+}
+
+// Body
+.text-body {
+  font-family: $font-sans;
+  font-size: $text-body;
+  line-height: 1.3;
+}
+
+// Label / caption
+.text-label {
+  font-family: $font-sans;
+  font-size: 0.875rem;
+  color: $muted;
+}
+
+// Hero headline
+.hero-sans {
+  font-family: $font-sans;
+  font-weight: 500;
+  font-size: $hero-sans-size;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hero-serif {
+  font-family: $font-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: $hero-serif-size;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
