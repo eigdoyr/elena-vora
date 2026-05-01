@@ -3,6 +3,7 @@
     <Navbar />
     <Hero />
     <About />
+    <Portfolio />
   </main>
 </template>
 
@@ -10,6 +11,7 @@
 import Navbar from '@components/Navbar.vue'
 import Hero from '@sections/Hero.vue'
 import About from '@sections/About.vue'
+import Portfolio from '@sections/Portfolio.vue'
 </script>
 
 <style lang="scss">

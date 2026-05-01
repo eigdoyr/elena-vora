@@ -7,7 +7,7 @@ export interface PortfolioItem {
   image: string
   title: string
   location: string
-  url: string
+  slug: string
 }
 
 export const portfolioItems: PortfolioItem[] = [
@@ -16,20 +16,20 @@ export const portfolioItems: PortfolioItem[] = [
     image: portfolio1,
     title: 'The Amalfi Elopement',
     location: 'Amalfi Coast, Italy',
-    url: '/portfolio/the-amalfi-elopement',
+    slug: 'the-amalfi-elopement',
   },
   {
     id: 2,
     image: portfolio2,
     title: 'Vogue Wedding in Provence',
     location: 'Provence, France',
-    url: '/portfolio/vogue-wedding-in-provence',
+    slug: 'vogue-wedding-in-provence',
   },
   {
     id: 3,
     image: portfolio3,
     title: 'City Hall Civil Ceremony',
     location: 'New York City',
-    url: '/portfolio/city-hall-civil-ceremony',
+    slug: 'city-hall-civil-ceremony',
   },
 ]
