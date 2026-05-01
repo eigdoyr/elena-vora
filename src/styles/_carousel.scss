@@ -1,0 +1,9 @@
+@use 'variables' as *;
+
+@for $i from 1 through length($card-colors) {
+  .card-color-#{$i} {
+    $color: nth($card-colors, $i);
+    background-color: $color;
+    --card-bg: #{$color};
+  }
+}
