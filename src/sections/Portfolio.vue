@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { portfolioItems } from '@/data/portfolioItems'
-import PortfolioItem from '@/components/PortfolioItem.vue'
+import { portfolioItems } from '@data/portfolioItems'
+import PortfolioItem from '@components/PortfolioItem.vue'
 
 const featured = portfolioItems.slice(0, 3)
 </script>
