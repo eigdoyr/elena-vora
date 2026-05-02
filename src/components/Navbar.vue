@@ -18,7 +18,9 @@
       <span />
       <span />
     </button>
+  </nav>
 
+  <Teleport to="body">
     <div class="navbar-menu" :class="{ 'navbar-menu--open': isOpen }">
       <ul class="navbar-menu-links">
         <li><a href="#portfolio" @click="closeMenu">Portfolio</a></li>
@@ -27,11 +29,11 @@
         <li><a href="#contact" @click="closeMenu">Contact</a></li>
       </ul>
     </div>
-  </nav>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 const isOpen = ref(false)
 const isScrolled = ref(false)
@@ -39,6 +41,7 @@ const isScrolled = ref(false)
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
 }
+
 const closeMenu = () => {
   isOpen.value = false
 }
@@ -47,8 +50,15 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
 
+watch(isOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
 onMounted(() => window.addEventListener('scroll', handleScroll))
-onUnmounted(() => window.removeEventListener('scroll', handleScroll))
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  document.body.style.overflow = ''
+})
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +69,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 102;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,7 +119,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   border: none;
   cursor: pointer;
   padding: 0.25rem;
-  z-index: 101;
+  z-index: 102;
 
   span {
     display: block;
@@ -125,40 +135,6 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     }
     span:nth-child(2) {
       transform: translateY(-3px) rotate(-45deg);
-    }
-  }
-}
-
-.navbar-menu {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background-color: $off-white;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-
-  &--open {
-    display: flex;
-  }
-}
-
-.navbar-menu-links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-
-  a {
-    font-family: $font-sans;
-    font-weight: 500;
-    font-size: 2rem;
-    color: $dark-green;
-    transition: opacity 0.3s ease;
-
-    &:hover {
-      opacity: 0.5;
     }
   }
 }

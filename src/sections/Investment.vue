@@ -1,5 +1,5 @@
 <template>
-  <section class="investment section-padding">
+  <section class="investment section-padding" id="services">
     <div class="investment__intro">
       <h2 class="investment__heading text-heading">
         <span class="sans">The</span>
