@@ -1,38 +1,34 @@
 <template>
   <section class="hero" id="hero" data-nav-theme="light">
-    <div class="hero-bg">
-      <img :src="heroBg" alt="Wedding couple at the beach" />
+    <div class="hero__bg">
+      <img :src="heroBg" alt="" />
     </div>
 
-    <div class="hero-headline">
-      <p class="hero-sans">The Art of the</p>
-      <p class="hero-serif">Unscripted.</p>
-    </div>
+    <h1 class="hero__headline">
+      <span class="hero-sans">The Art of the</span>
+      <span class="hero-serif">Unscripted.</span>
+    </h1>
 
-    <div class="hero-subject">
+    <div class="hero__subject">
       <img :src="heroSubject" alt="Wedding couple" />
+      <span class="hero__focus hero__focus--bride">
+        <span class="hero__focus-corner hero__focus-corner--tl" />
+        <span class="hero__focus-corner hero__focus-corner--tr" />
+        <span class="hero__focus-corner hero__focus-corner--bl" />
+        <span class="hero__focus-corner hero__focus-corner--br" />
+      </span>
+      <span class="hero__focus hero__focus--groom">
+        <span class="hero__focus-corner hero__focus-corner--tl" />
+        <span class="hero__focus-corner hero__focus-corner--tr" />
+        <span class="hero__focus-corner hero__focus-corner--bl" />
+        <span class="hero__focus-corner hero__focus-corner--br" />
+      </span>
     </div>
 
-    <div class="hero-focus hero-focus--bride">
-      <span class="hero-focus__tl" />
-      <span class="hero-focus__tr" />
-      <span class="hero-focus__bl" />
-      <span class="hero-focus__br" />
-    </div>
-
-    <div class="hero-focus hero-focus--groom">
-      <span class="hero-focus__tl" />
-      <span class="hero-focus__tr" />
-      <span class="hero-focus__bl" />
-      <span class="hero-focus__br" />
-    </div>
-
-    <div class="hero-tagline">
-      <p>
-        Wedding photography for the modern romantic. Capturing love with a
-        fashion-forward eye and a documentary soul.
-      </p>
-    </div>
+    <p class="hero__tagline">
+      Wedding photography for the modern romantic. Capturing love with a
+      fashion-forward eye and a documentary soul.
+    </p>
   </section>
 </template>
 
@@ -53,21 +49,18 @@ import heroSubject from '@assets/hero/hero-subject.png'
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40%;
+    inset: 60% 0 0 0;
     background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.5) 0%,
       rgba(0, 0, 0, 0) 100%
     );
-    z-index: 3;
+    z-index: 1;
     pointer-events: none;
   }
 }
 
-.hero-bg {
+.hero__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -76,97 +69,115 @@ import heroSubject from '@assets/hero/hero-subject.png'
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
   }
 }
 
-.hero-headline {
+.hero__headline {
   position: absolute;
-  top: 31%;
+  top: 18%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   z-index: 2;
   width: 100%;
   text-align: center;
   pointer-events: none;
+  margin: 0;
+
+  .hero-sans,
+  .hero-serif {
+    display: block;
+  }
+
+  .hero-sans {
+    margin-bottom: -0.15em;
+  }
 }
 
-.hero-sans {
-  margin-bottom: -0.15em;
-}
-
-.hero-subject {
+.hero__subject {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   z-index: 3;
-  height: 100%;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
   }
 }
 
-.hero-focus {
+$bride-x: 47.5%;
+$bride-y: 44.1%;
+$groom-x: 60.2%;
+$groom-y: 47.1%;
+$focus-size: clamp(80px, 10vw, 100px);
+
+.hero__focus {
   position: absolute;
-  z-index: 4;
+  width: $focus-size;
   aspect-ratio: 1;
   pointer-events: none;
-  width: 7%;
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+  animation: focus-lock 0.8s ease-out forwards;
+
+  &--bride {
+    top: $bride-y;
+    left: $bride-x;
+    animation-delay: 0.4s;
+  }
+
+  &--groom {
+    top: $groom-y;
+    left: $groom-x;
+    animation-delay: 0.55s;
+  }
 }
 
-.hero-focus--bride {
-  top: 37%;
-  left: 44%;
-}
-
-.hero-focus--groom {
-  top: 42%;
-  left: 57%;
-}
-
-.hero-focus__tl,
-.hero-focus__tr,
-.hero-focus__bl,
-.hero-focus__br {
+.hero__focus-corner {
   position: absolute;
   width: 25%;
   height: 25%;
   border-color: $white;
   border-style: solid;
-  display: block;
   opacity: 0.9;
+
+  &--tl {
+    top: 0;
+    left: 0;
+    border-width: 2px 0 0 2px;
+  }
+  &--tr {
+    top: 0;
+    right: 0;
+    border-width: 2px 2px 0 0;
+  }
+  &--bl {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 2px 2px;
+  }
+  &--br {
+    bottom: 0;
+    right: 0;
+    border-width: 0 2px 2px 0;
+  }
 }
 
-.hero-focus__tl {
-  top: 0;
-  left: 0;
-  border-width: 2px 0 0 2px;
+@keyframes focus-lock {
+  0% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+  }
 }
 
-.hero-focus__tr {
-  top: 0;
-  right: 0;
-  border-width: 2px 2px 0 0;
-}
-
-.hero-focus__bl {
-  bottom: 0;
-  left: 0;
-  border-width: 0 0 2px 2px;
-}
-
-.hero-focus__br {
-  bottom: 0;
-  right: 0;
-  border-width: 0 2px 2px 0;
-}
-
-.hero-tagline {
+.hero__tagline {
   position: absolute;
   bottom: 2rem;
   left: 50%;
@@ -174,45 +185,19 @@ import heroSubject from '@assets/hero/hero-subject.png'
   z-index: 5;
   max-width: 340px;
   text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: $white;
+  margin: 0;
 
-  p {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: $white;
-  }
-}
-
-/* Tablet */
-@media (max-width: $tablet) {
-  .hero-focus--bride {
-    top: 41%;
-    left: 38%;
-    width: 13%;
-  }
-
-  .hero-focus--groom {
-    top: 43%;
-    left: 66%;
-    width: 13%;
-  }
-}
-
-/* Mobile */
-@media (max-width: $mobile) {
-  .hero-focus--bride {
-    top: 42%;
-    left: 34%;
-    width: 16%;
-  }
-
-  .hero-focus--groom {
-    top: 45%;
-    left: 72%;
-    width: 16%;
-  }
-
-  .hero-tagline {
+  @media (max-width: $mobile) {
     max-width: 280px;
+  }
+}
+
+@media (max-width: $tablet) {
+  .hero__focus {
+    display: none;
   }
 }
 </style>
