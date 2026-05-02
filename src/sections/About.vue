@@ -1,5 +1,5 @@
 <template>
-  <section class="about section-padding" id="about">
+  <section class="about section-padding" id="about" data-nav-theme="dark">
     <div class="about-header">
       <h2 class="about-heading">
         <span class="serif">Beyond</span><br />

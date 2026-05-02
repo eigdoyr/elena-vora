@@ -1,5 +1,9 @@
 <template>
-  <section class="testimonial section-padding" id="testimonials">
+  <section
+    class="testimonial section-padding"
+    id="testimonials"
+    data-nav-theme="dark"
+  >
     <button
       class="testimonial__arrow testimonial__arrow--prev"
       aria-label="Previous testimonial"

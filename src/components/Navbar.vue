@@ -1,5 +1,11 @@
 <template>
-  <nav class="navbar" :class="{ 'navbar--scrolled': isScrolled }">
+  <nav
+    class="navbar"
+    :class="[
+      { 'navbar--scrolled': isScrolled },
+      `navbar--theme-${currentTheme}`,
+    ]"
+  >
     <a href="#hero" class="navbar-logo">Elena Vora</a>
 
     <ul class="navbar-links">
@@ -37,6 +43,7 @@ import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 const isOpen = ref(false)
 const isScrolled = ref(false)
+const currentTheme = ref<'light' | 'dark'>('light')
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
@@ -54,10 +61,40 @@ watch(isOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
 })
 
-onMounted(() => window.addEventListener('scroll', handleScroll))
+let observer: IntersectionObserver | null = null
+
+const setupObserver = () => {
+  const sections = document.querySelectorAll<HTMLElement>('[data-nav-theme]')
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const theme = entry.target.getAttribute('data-nav-theme')
+          if (theme === 'light' || theme === 'dark') {
+            currentTheme.value = theme
+          }
+        }
+      })
+    },
+    {
+      rootMargin: '-10px 0px -90% 0px',
+      threshold: 0,
+    }
+  )
+
+  sections.forEach((section) => observer?.observe(section))
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+  setupObserver()
+})
+
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
   document.body.style.overflow = ''
+  observer?.disconnect()
 })
 </script>
 
@@ -74,10 +111,33 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  transition: background-color 0.3s ease;
+  transition:
+    background-color 0.4s ease,
+    color 1s ease;
 
-  &--scrolled {
-    background-color: rgba(250, 250, 248, 0.95);
+  &--theme-light {
+    color: $dark-green;
+
+    .navbar-hamburger span {
+      background-color: $dark-green;
+    }
+  }
+
+  &--theme-dark {
+    color: $off-white;
+
+    .navbar-hamburger span {
+      background-color: $off-white;
+    }
+  }
+
+  &--scrolled.navbar--theme-light {
+    background-color: rgba(250, 250, 248, 0.85);
+    backdrop-filter: blur(8px);
+  }
+
+  &--scrolled.navbar--theme-dark {
+    background-color: rgba(34, 36, 32, 0.85);
     backdrop-filter: blur(8px);
   }
 }
@@ -86,7 +146,7 @@ onUnmounted(() => {
   font-family: $font-sans;
   font-weight: 500;
   font-size: 0.875rem;
-  color: $dark-green;
+  color: inherit;
   letter-spacing: 0.02em;
 }
 
@@ -102,7 +162,7 @@ onUnmounted(() => {
     font-family: $font-sans;
     font-weight: 400;
     font-size: 0.875rem;
-    color: $dark-green;
+    color: inherit;
     transition: opacity 0.2s ease;
 
     &:hover {
@@ -125,8 +185,9 @@ onUnmounted(() => {
     display: block;
     width: 24px;
     height: 1px;
-    background-color: $dark-green;
-    transition: all 0.3s ease;
+    transition:
+      all 0.3s ease,
+      background-color 0.4s ease;
   }
 
   &--open {

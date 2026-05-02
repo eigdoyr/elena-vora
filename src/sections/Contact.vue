@@ -1,5 +1,5 @@
 <template>
-  <section class="contact section-padding" id="contact">
+  <section class="contact section-padding" id="contact" data-nav-theme="dark">
     <div class="contact__intro">
       <h2 class="contact__heading text-heading">
         <span class="sans">Let's Create</span>

@@ -1,5 +1,5 @@
 <template>
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" data-nav-theme="light">
     <div class="hero-bg">
       <img :src="heroBg" alt="Wedding couple at the beach" />
     </div>

@@ -6,7 +6,11 @@ const featured = portfolioItems.slice(0, 3)
 </script>
 
 <template>
-  <section class="portfolio section-padding" id="portfolio">
+  <section
+    class="portfolio section-padding"
+    id="portfolio"
+    data-nav-theme="light"
+  >
     <h2 class="portfolio__heading text-heading">
       <span class="sans">Selected</span>
       <span class="serif">Narratives</span>
