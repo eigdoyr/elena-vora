@@ -7,6 +7,7 @@
     <Investment />
     <Testimonial />
     <Contact />
+    <Footer />
   </main>
 </template>
 
@@ -18,6 +19,7 @@ import Portfolio from '@sections/Portfolio.vue'
 import Investment from '@sections/Investment.vue'
 import Testimonial from '@sections/Testimonial.vue'
 import Contact from '@sections/Contact.vue'
+import Footer from '@components/Footer.vue'
 </script>
 
 <style lang="scss">
