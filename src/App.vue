@@ -6,6 +6,7 @@
     <Portfolio />
     <Investment />
     <Testimonial />
+    <Contact />
   </main>
 </template>
 
@@ -16,6 +17,7 @@ import About from '@sections/About.vue'
 import Portfolio from '@sections/Portfolio.vue'
 import Investment from '@sections/Investment.vue'
 import Testimonial from '@sections/Testimonial.vue'
+import Contact from '@sections/Contact.vue'
 </script>
 
 <style lang="scss">
